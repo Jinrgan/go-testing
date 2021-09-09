@@ -1,4 +1,4 @@
-module unit-test
+module gitee.com/bbm2021/unit-test
 
 go 1.15
 
