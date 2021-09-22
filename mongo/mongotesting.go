@@ -19,6 +19,8 @@ const (
 
 var mongoURI string
 
+const defaultMongoURI = "mongodb://localhost:27017"
+
 //RunWithMongoInDocker runs the tests with
 // a mongo instance in a docker container.
 func RunWithMongoInDocker(m *testing.M) int {
@@ -79,4 +81,9 @@ func NewClient(c context.Context) (*mongo.Client, error) {
 	}
 
 	return mongo.Connect(c, options.Client().ApplyURI(mongoURI))
+}
+
+//NewDefaultClient creates a client connected to localhost:27017
+func NewDefaultClient(c context.Context) (*mongo.Client, error) {
+	return mongo.Connect(c, options.Client().ApplyURI(defaultMongoURI))
 }
