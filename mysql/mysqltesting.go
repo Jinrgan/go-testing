@@ -3,8 +3,13 @@ package mysqltesting
 import (
 	"context"
 	"fmt"
+	"log"
+	"os"
 	"testing"
 	"time"
+
+	"gorm.io/gorm/logger"
+	"gorm.io/gorm/schema"
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
@@ -22,6 +27,8 @@ const (
 )
 
 var mysqlDSN string
+
+const defaultMysqlDSN = "root:123456@tcp(localhost:3306)"
 
 //RunWithMysqlInDocker runs the tests with
 // a mysql instance in a docker container.
@@ -98,4 +105,20 @@ func NewDB() (*gorm.DB, error) {
 			return db, err
 		}
 	}
+}
+
+//NewDefaultDB creates a database connect to localhost:3306
+func NewDefaultDB(db string) (*gorm.DB, error) {
+	return gorm.Open(mysql.Open(defaultMysqlDSN+"/"+db), &gorm.Config{
+		NamingStrategy: schema.NamingStrategy{
+			SingularTable: true, // 启用单数命名
+		},
+		Logger: logger.New(
+			log.New(os.Stdout, "\r\n", log.LstdFlags),
+			logger.Config{
+				SlowThreshold: time.Millisecond, // 慢查询阈值
+				Colorful:      true,
+				LogLevel:      logger.Info,
+			}),
+	})
 }
