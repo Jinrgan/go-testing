@@ -1,4 +1,4 @@
-module gitee.com/bbm2021/unit-test
+module  github.com/Jinrgan/unit-test
 
 go 1.15
 
