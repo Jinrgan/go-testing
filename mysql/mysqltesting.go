@@ -3,20 +3,22 @@ package mysqltesting
 import (
 	"context"
 	"fmt"
+	"testing"
+	"time"
+
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 	"github.com/docker/go-connections/nat"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
-	"testing"
-	"time"
 )
 
 const (
 	image         = "mysql:5.6"
 	containerPort = "3306/tcp"
 	pwdEnv        = "MYSQL_ROOT_PASSWORD=root"
+	dbEnv         = "MYSQL_DATABASE=test"
 )
 
 var mysqlDSN string
@@ -36,7 +38,7 @@ func RunWithMysqlInDocker(m *testing.M) int {
 			ExposedPorts: nat.PortSet{
 				containerPort: {},
 			},
-			Env:   []string{pwdEnv},
+			Env:   []string{pwdEnv, dbEnv},
 			Image: image,
 		},
 		&container.HostConfig{
