@@ -8,7 +8,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
-	unit_test "github.com/Jinrgan/unit-test"
+	unit_test "github.com/Jinrgan/go-testing"
 )
 
 const (

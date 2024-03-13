@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	mongotesting "github.com/Jinrgan/unit-test/mongo"
+	mongotesting "github.com/Jinrgan/go-testing/mongo"
 )
 
 func TestTest(t *testing.T) {

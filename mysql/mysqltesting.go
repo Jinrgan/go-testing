@@ -9,11 +9,10 @@ import (
 
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
-
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
-	unit_test "github.com/Jinrgan/unit-test"
+	unit_test "github.com/Jinrgan/go-testing"
 )
 
 const (
